@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Minds - Multimedia Gallery</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333; /* Dark text for readability */
+            margin: 0;
+            background: #eafaf1; /* Light background */
+            line-height: 1.6;
+        }
+        
+        /* Smooth Scrolling */
+        html { scroll-behavior: smooth; }
+        
+        /* Navigation Bar */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background: rgba(255, 255, 255, 0.2); /* Glassmorphism effect */
+          backdrop-filter: blur(8px);
+          padding: 15px 20px;
+          box-shadow: 0 6px 20px rgba(31, 38, 135, 0.3); /* Frosted shadow */
+          border-radius: 10px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          position: fixed;
+          top: 20px;
+          width: 90%;
+          z-index: 1000;
+          right: 45px;
+        }
+        
+        .nav-links {
+          list-style: none;
+          display: flex;
+        }
+        
+        .nav-links li {
+          margin-left: 20px;
+        }
+        
+        .nav-links a {
+          color: black;
+          text-decoration: none;
+          transition: color 0.3s ease, transform 0.3s ease;
+          font-size: 20px; /* Increased font size */
+          font-weight: bold; /* Made text bold */
+        }
+        
+        .nav-links a:hover {
+          color: #28a745; /* Green on hover */
+          transform: scale(1.1);
+        }
+        .logo{
+            align-content:center;
+        }
+        .logo img {
+          height: 60px; /* Increased logo size */
+          width: 60px; /* Increased logo size */
+          margin-right: 10px;
+          border-radius: 50%;
+          object-fit: cover;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Soft shadow effect */
+          transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        
+        .logo img:hover {
+          box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5); /* Glow effect on hover */
+          transform: scale(1.05); /* Slight enlargement */
+        }
+        
+        /* Multimedia Gallery Section */
+        .multimedia-gallery {
+            padding: 80px 20px; /* Space above */
+            text-align: center;
+            background: #f7f7f7; /* Light background for gallery */
+            border-radius: 10px;
+            margin-top: 100px; /* Space for the fixed navbar */
+        }
+        
+        .gallery-section {
+            margin-bottom: 60px; /* Increased spacing between sections */
+        }
+        
+        .gallery-section h2 {
+            font-size: 36px;
+            color: #28a745; /* Green for headings */
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+        }
+        
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px; /* Reduced gap for a tighter layout */
+        }
+        
+        .image-gallery img {
+            width: 100%; /* Full width */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s; /* Added box-shadow transition */
+        }
+        
+        .image-gallery img:hover {
+            transform: scale(1.05); /* Scale effect on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Shadow on hover */
+        }
+        
+        /* Video Gallery */
+        .video-gallery {
+            margin: 20px 0;
+        }
+        
+        .video-section {
+            background: #28a745; /* Green background for emphasis */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Soft shadow */
+            transition: transform 0.3s, box-shadow 0.3s; /* Transition for hover effect */
+        }
+        
+        .video-section:hover {
+            transform: scale(1.03); /* Scale effect on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Shadow on hover */
+        }
+        
+        iframe {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+        }
+        
+        /* Podcast & News Section */
+        .podcast-list {
+            list-style: none;
+            padding: 0;
+            background: #e7f9e7; /* Light green background for podcast section */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow */
+        }
+        
+        .podcast-list li {
+            margin: 10px 0;
+        }
+        
+        .podcast-list a {
+            color: #333; /* Dark color for visibility */
+            text-decoration: underline;
+            transition: color 0.3s, transform 0.3s; /* Added transform transition */
+            font-weight: bold; /* Made text bold */
+        }
+        
+        .podcast-list a:hover {
+            color: #28a745; /* Green for hover */
+            transform: scale(1.05); /* Slight scale on hover */
+        }
+        /* Smooth Scrolling */
+        html { scroll-behavior: smooth; }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo" style="font-size: 40px; align-content:center;align-items:center;/* Increased font size */font-weight: bold;">
+            <img src="{{ url_for('static', filename='IMG/logo.png') }}" alt="Green Minds Logo"> <!-- Replace with actual logo path -->
+        </div>
+        <h4 style="margin-left:-250px;font-size:30px;">Green Minds</h4>
+
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/dashboard" target="_blank">Dashboard</a></li>
+            <li><a href="/roadmap">Climate Quiz</a></li>
+            <li><a href="/gallery">Multimedia Gallery</a></li>
+            <li><a href="/narrative">Climate Stories</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Multimedia Gallery Section -->
+    <section class="multimedia-gallery">
+        <h1>Multimedia Gallery</h1>
+
+        <div class="gallery-section">
+            <h2>Images</h2>
+            <div class="image-gallery">
+                <img src="{{ url_for('static', filename='IMG/gallery/1.png') }}" alt="Description of image 1">
+                <img src="{{ url_for('static', filename='IMG/gallery/2.png') }}" alt="Description of image 2">
+                <img src="{{ url_for('static', filename='IMG/gallery/3.jpeg') }}" alt="Description of image 3">
+                <img src="{{ url_for('static', filename='IMG/gallery/4.jpeg') }}" alt="Description of image 3">
+                <img src="{{ url_for('static', filename='IMG/gallery/5.png') }}" alt="Description of image 3">
+                <!-- Add more images as needed -->
+            </div>
+        </div>
+
+        <div class="video-gallery">
+            <div class="video-section">
+                <iframe src="{{ url_for('static', filename='Green minds.mp4') }}" title="Video Title" allowfullscreen></iframe>
+                <div class="play-button"></div> <!-- Play button overlay -->
+            </div>
+
+            <!-- Add more video sections as needed -->
+        </div>
+        
+
+        <div class="gallery-section">
+            <h2>Podcasts & News</h2>
+            <ul class="podcast-list">
+                <li><a href="https://www.youtube.com/watch?v=E71PoBPyq8A" target="_blank">Tokyo Tunnels </a></li>
+                <li><a href="https://www.youtube.com/watch?v=cSEAaug9fgc" target="_blank">Heavy Rain Alert- chennai, India</a></li>
+                <li><a href="https://www.youtube.com/watch?v=sDS1sFg6lNw" target="_blank">Climate Change and Global Warming</a></li>
+                <li><a href="https://www.youtube.com/watch?v=0XNuj2wfnCk" target="_blank">Carbon Footprint</a></li>
+                <!-- Add more podcasts as needed -->
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Green Minds. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

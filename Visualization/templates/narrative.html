@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Minds - Climate Change Stories</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #e0f7fa, #e8f5e9); /* Gradient background */
+            color: #333;
+        }
+        
+        h1, h2 {
+            color: #388e3c;
+            text-align: center;
+        }
+        
+        p {
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        /* Navigation Bar */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background: rgba(255, 255, 255, 0.2); /* Glassmorphism effect */
+          backdrop-filter: blur(8px);
+          padding: 15px 20px;
+          box-shadow: 0 6px 20px rgba(31, 38, 135, 0.3); /* Frosted shadow */
+          border-radius: 10px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          position: absolute;
+          top: 20px;
+          width: 90%;
+          z-index: 1000;
+          right: 45px;
+        }
+        
+        .nav-links {
+          list-style: none;
+          display: flex;
+        }
+        
+        .nav-links li {
+          margin-left: 20px;
+        }
+        
+        .nav-links a {
+          color: black;
+          text-decoration: none;
+          transition: color 0.3s ease, transform 0.3s ease;
+          font-size: 20px; /* Increased font size */
+          font-weight: bold; /* Made text bold */
+        }
+        
+        .nav-links a:hover {
+          color: #28a745; /* Green on hover */
+          transform: scale(1.1);
+        }
+        .logo{
+            align-content:center;
+        }
+        .logo img {
+          height: 60px; /* Increased logo size */
+          width: 60px; /* Increased logo size */
+          margin-right: 10px;
+          border-radius: 50%;
+          object-fit: cover;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Soft shadow effect */
+          transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        
+        .logo img:hover {
+          box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5); /* Glow effect on hover */
+          transform: scale(1.05); /* Slight enlargement */
+        }
+        /* Section Containers */
+        #case-studies, #personal-narratives {
+            margin-top: 50px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        #case-studies:hover, #personal-narratives:hover {
+            transform: translateY(-5px); /* Lift on hover */
+        }
+        
+        /* Case Studies and Narratives */
+        .case-study, .narrative {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 5px solid #4caf50; /* Green accent border */
+            margin: 15px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        
+        .case-study:hover, .narrative:hover {
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1); /* Elevation on hover */
+            transform: translateY(-5px); /* Lift effect */
+        }
+        
+        /* Options (Like, Delete) */
+        .options {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .dots {
+            cursor: pointer;
+            font-size: 20px;
+            color: #888;
+        }
+        
+        .dots:hover {
+            color: #4caf50;
+        }
+        
+        .options button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .options button:hover {
+            background-color: #388e3c; /* Darker green on hover */
+        }
+        
+        /* Read More Button */
+        .read-more {
+            background-color: #388e3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .read-more:hover {
+            background-color: #2e7d32;
+            transform: scale(1.05); /* Button scales up on hover */
+        }
+        
+        /* Form Styles */
+        form {
+            margin-top: 20px;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #d1e7d1;
+            background: #f9f9f9;
+            font-size: 16px;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            border-color: #4caf50;
+            outline: none;
+        }
+        
+        button[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #388e3c;
+        }
+        
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        
+            .case-study, .narrative {
+                margin: 10px 0;
+            }
+        
+            button[type="submit"] {
+                width: 100%;
+            }
+        }
+        
+        /* Button for story submission */
+        .submit-story-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            background-color: #388e3c;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-story-btn:hover {
+            background-color: #2e7d32;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <!-- Navigation Bar -->
+      <!-- Navigation Bar -->
+      <nav class="navbar">
+        <div class="logo" style="font-size: 40px; align-content:center;align-items:center;/* Increased font size */font-weight: bold;">
+            <img src="{{ url_for('static', filename='IMG/logo.png') }}" alt="Green Minds Logo"> <!-- Replace with actual logo path -->
+        </div>
+        <h4 style="margin-left:-250px;font-size:30px;">Green Minds</h4>
+
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/dashboard" target="_blank">Dashboard</a></li>
+            <li><a href="/roadmap">Climate Quiz</a></li>
+            <li><a href="/gallery">Multimedia Gallery</a></li>
+            <li><a href="/narrative">Climate Stories</a></li>
+        </ul>
+    </nav>
+
+    <h1 style="margin-top:180px;">Green Minds - Climate Change Stories</h1>   
+    <section id="personal-narratives">
+        <h2>Submit Your Story</h2>
+        <form id="story-form">
+            <label for="title">Title:</label>
+            <input type="text" id="title" required>
+
+            <label for="content">Content:</label>
+            <textarea id="content" required></textarea>
+
+            <label for="type">Type:</label>
+            <select id="type">
+                <option value="case-study">Case Study</option>
+                <option value="personal-narrative">Personal Narrative</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form> 
+    </section>
+    <!-- Case Studies Section -->
+    <section id="case-studies">
+        <h2>Case Studies on Climate Change</h2>
+        <div id="case-studies-container">
+            <div class="case-study" id="case-study-1">
+                <h3>The Maldives: Rising Sea Levels</h3>
+                <p>This case study explores the rising sea levels threatening the Maldives and the efforts made to mitigate this issue.</p>
+                <div class="options">
+                    <span class="dots" onclick="toggleOptions('case-study-1-options')">...</span>
+                    <div id="case-study-1-options" style="display: none;">
+                        <button onclick="deleteStory('case-study-1')">Delete</button>
+                        <button onclick="likeStory('case-study-1')">Like</button>
+                    </div>
+                </div>
+                <button class="read-more" onclick="alert('Read more about this case study.')">Read More</button>
+            </div>
+
+            <div class="case-study" id="case-study-2">
+                <h3>California Wildfires</h3>
+                <p>California has been experiencing increasingly frequent and intense wildfires in recent years, a situation exacerbated by climate change. Rising temperatures and prolonged droughts have created ideal conditions for wildfires to ignite and spread, threatening communities, wildlife, and natural resources.</p>
+                <div class="options">
+                    <span class="dots" onclick="toggleOptions('case-study-2-options')">...</span>
+                    <div id="case-study-2-options" style="display: none;">
+                        <button onclick="deleteStory('case-study-2')">Delete</button>
+                        <button onclick="likeStory('case-study-2')">Like</button>
+                    </div>
+                </div>
+                <button class="read-more" onclick="alert('Read more about this case study.')">Read More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Narratives Section -->
+    <section id="personal-narratives">
+  
+
+        <h2>Personal Narratives</h2>
+        <div id="narratives">
+            <!-- Loaded personal narratives will appear here -->
+        </div>
+    </section>
+
+    <script>
+        // Initialize stories array from localStorage or empty array
+        let stories = JSON.parse(localStorage.getItem('stories')) || [];
+
+        // Function to render case studies
+        function renderCaseStudies() {
+            const caseStudiesContainer = document.getElementById('case-studies-container');
+            caseStudiesContainer.innerHTML = ''; // Clear previous case studies
+
+            // Render existing case studies
+            stories.forEach((story, index) => {
+                if (story.type === 'case-study') {
+                    const storyDiv = document.createElement('div');
+                    storyDiv.classList.add('case-study');
+                    storyDiv.innerHTML = `
+                        <h3>${story.title}</h3>
+                        <p>${story.content}</p>
+                        <div class="options">
+                            <span class="dots" onclick="toggleOptions('case-study-${index}-options')">...</span>
+                            <div id="case-study-${index}-options" style="display: none;">
+                                <button onclick="deleteStory(${index})">Delete</button>
+                                <button onclick="likeStory(${index})">Like</button>
+                            </div>
+                        </div>
+                        <button class="read-more" onclick="alert('Read more about this case study.')">Read More</button>
+                    `;
+                    caseStudiesContainer.appendChild(storyDiv);
+                }
+            });
+        }
+
+        // Function to render personal narratives
+        function renderPersonalNarratives() {
+            const narrativesContainer = document.getElementById('narratives');
+            narrativesContainer.innerHTML = ''; // Clear previous narratives
+
+            // Render existing personal narratives
+            stories.forEach((story, index) => {
+                if (story.type === 'personal-narrative') {
+                    const storyDiv = document.createElement('div');
+                    storyDiv.classList.add('narrative');
+                    storyDiv.innerHTML = `
+                        <h3>${story.title}</h3>
+                        <p>${story.content}</p>
+                        <div class="options">
+                            <span class="dots" onclick="toggleOptions('narrative-${index}-options')">...</span>
+                            <div id="narrative-${index}-options" style="display: none;">
+                                <button onclick="deleteStory(${index})">Delete</button>
+                                <button onclick="likeStory(${index})">Like</button>
+                            </div>
+                        </div>
+                        <button class="read-more" onclick="alert('Read more about this personal narrative.')">Read More</button>
+                    `;
+                    narrativesContainer.appendChild(storyDiv);
+                }
+            });
+        }
+
+        // Toggle visibility of options
+        function toggleOptions(id) {
+            const options = document.getElementById(id);
+            if (options.style.display === 'none') {
+                options.style.display = 'block';
+            } else {
+                options.style.display = 'none';
+            }
+        }
+
+        // Delete story function
+        function deleteStory(index) {
+            if (confirm('Are you sure you want to delete this story?')) {
+                stories.splice(index, 1); // Remove story from array
+                localStorage.setItem('stories', JSON.stringify(stories)); // Update localStorage
+                renderCaseStudies(); // Re-render case studies
+                renderPersonalNarratives(); // Re-render narratives
+            }
+        }
+
+        // Like story function
+        function likeStory(index) {
+            alert('You liked this story!');
+        }
+
+        // Handle form submission
+        document.getElementById('story-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent page refresh
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            const type = document.getElementById('type').value;
+
+            // Add new story to stories array
+            stories.push({ title, content, type });
+            localStorage.setItem('stories', JSON.stringify(stories)); // Update localStorage
+
+            // Clear form fields
+            document.getElementById('story-form').reset();
+
+            renderCaseStudies(); // Re-render case studies
+            renderPersonalNarratives(); // Re-render narratives
+        });
+
+        // Initial rendering of stories
+        renderCaseStudies();
+        renderPersonalNarratives();
+    </script>
+</body>
+</html>

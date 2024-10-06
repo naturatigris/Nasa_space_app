@@ -1,0 +1,145 @@
+body {
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#planet-container {
+  width: 300px;
+  height: 300px;
+  margin: 20px auto;
+  position: relative;
+}
+
+#planet {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: filter 0.5s ease; /* For animation */
+  filter: hue-rotate(180deg); /* Start red */
+}
+
+#ghg-level {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* GHG Tube positioning */
+#ghg-tube {
+  width: 40px; /* Tube width */
+  height: 300px; /* Increased height */
+  background-color: red;
+  border-radius: 20px;
+  margin: 10px 0;
+  position: absolute; /* Absolute positioning */
+  right: -500px; /* Move to the right */
+  top: -100px; /* Align with the middle of the container */
+  transform: translateY(-50%); /* Center vertically */
+  overflow: hidden;
+  display: flex; /* Use flex for segments */
+  flex-direction: column-reverse; /* Fill from the bottom */
+}
+
+.segment {
+  flex: 1; /* Take equal space */
+  background-color: red; /* Change to red */
+  border-radius: 0; /* Remove rounding for rectangular shape */
+  transition: background-color 0.5s ease; /* Transition for filling */
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.3); /* 3D effect */
+  margin: 0; /* Ensure no margin to hide partitions */
+}
+
+
+.filled {
+  background-color: green; /* Filled color */
+}
+
+#question-area {
+  margin-bottom: 20px;
+}
+
+#options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#feedback {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#play-again {
+  display: none; /* Initially hidden */
+  background-color: #f44336;
+  margin: 20px auto; /* Auto margins on left and right */
+  padding: 10px 20px; /* Add some padding */
+  border: none; /* Remove border if not needed */
+  color: white; /* Change text color for contrast */
+  cursor: pointer; /* Change cursor to pointer */
+  width: 150px; /* Set a width for the button */
+  text-align: center; /* Center text inside the button */
+}
+
+
+#play-again:hover {
+  background-color: #d32f2f;
+}
+
+.badge {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.badge-img {
+  width: 100px; /* Adjust size as needed */
+  height: auto;
+}
+
+.badge-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+* Play Again and Next Level Button */
+button#play-again,
+button#next-level {
+    margin-top: 20px;
+    font-size: 1.2em;
+    background-color: #ff9800; /* Orange color */
+}
+
+button#play-again:hover,
+button#next-level:hover {
+    background-color: #f57c20; /* Darker orange on hover */
+}

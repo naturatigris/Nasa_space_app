@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Climate Heroes Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Climate Heroes Quiz</h1>
+
+    <div id="level-container">
+      <p>Level: <span id="level">1</span></p>
+    </div>
+
+    <div id="planet-container">
+      <img id="planet" src="earth.png" alt="Planet Earth">
+      <div id="ghg-level">
+        <div id="ghg-tube">
+          <!-- 10 segments for GHG indicator -->
+          <div class="segment"></div>
+          <div class="segment"></div>
+          <div class="segment"></div>
+          <div class="segment"></div>
+          <div class="segment"></div>
+          <div class="segment"></div>
+          <div class="segment"></div>
+          <div class="segment"></div>
+          <div class="segment"></div>
+          <div class="segment"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="question-area">
+      <div id="question"></div>
+      <div id="options"></div>
+      <div id="feedback"></div>
+    </div>
+
+    <div id="score-area">
+      <p>Score: <span id="score">0</span></p>
+      <p><span id="badge"></span></p>
+    </div>
+
+    <div id="badge"></div>
+
+    <button id="play-again">Play Again</button>
+    <a id="next-level" href="Level4\index.html" style="display: none;">Next Level</a>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Protector</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun font for kids */
+            background-color: #b2ebf2; /* Light blue background */
+            color: #00796b; /* Dark teal text */
+            text-align: center;
+            animation: backgroundAnimation 15s infinite alternate; /* Background animation */
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background-color: #b2ebf2; }
+            50% { background-color: #80deea; }
+            100% { background-color: #e0f7fa; }
+        }
+
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 1100px;
+            border: 5px dashed #00796b; /* Dashed border for fun effect */
+            border-radius: 15px;
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Slight shadow */
+        }
+
+        h1 {
+            color: #004d40; /* Darker teal for the title */
+            font-size: 2.5em; /* Larger font size for the title */
+            text-shadow: 2px 2px 2px #80deea; /* Shadow for a pop effect */
+        }
+
+        .actions button {
+            margin: 10px;
+            padding: 12px 25px;
+            font-size: 18px; /* Bigger button text */
+            border: none;
+            border-radius: 12px;
+            background-color: #00796b; /* Button color */
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s; /* Animation for button click */
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); /* Shadow for buttons */
+        }
+
+        .actions button:hover {
+            background-color: #004d40; /* Darker teal on hover */
+            transform: scale(1.05); /* Slightly enlarge button */
+        }
+
+        #comment {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #d32f2f; /* Default comment color for negative actions */
+            font-size: 1.2em; /* Bigger comment text */
+        }
+        
+        img {
+            max-width: 90%; /* Ensures the image does not exceed the container's width */
+            height: auto; /* Maintains the aspect ratio */
+            margin: 10px 0; /* Adds some space around the image */
+            border-radius: 10px; /* Rounded corners for images */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow for images */
+        }
+        
+        #end-game-message {
+            display: none;
+            font-size: 28px; /* Larger font for end game message */
+            margin-top: 20px;
+            color: #d32f2f;
+            font-weight: bold; /* Bold for emphasis */
+        }
+        
+        .end-game-buttons {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .end-game-buttons button {
+            margin: 5px;
+            padding: 12px 25px;
+            background-color: #00796b; /* Button color */
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s; /* Animation for button click */
+        }
+       
+        .end-game-buttons button:hover {
+            background-color: #004d40; /* Darker teal on hover */
+            transform: scale(1.05); /* Slightly enlarge button */
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8); /* Darker background */
+            padding: 15px 20px; /* Increased padding for more height */
+            color: white;
+            position: relative; /* Make sure it’s positioned properly */
+            z-index: 1; /* Ensure it’s above other content */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            height:100px;
+            width:100px;
+        }
+
+        .logo img {
+            height:80px;
+            width:80px;/* Adjust height for logo */
+            margin-right: 10px; /* Spacing between logo and text */
+            border-radius: 50%; /* Make logo circular */
+           
+            object-fit: cover; /* Cover the area of the circle */
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em; /* Bigger font size for links */
+            transition: color 0.3s; /* Smooth color transition */
+        }
+
+        .nav-links a:hover {
+            color: #80deea; /* Color change on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='IMG/logo.png') }}" height="400px" width="400px" alt="Green Minds Logo"> <!-- Replace with actual logo path -->
+            
+        </div>
+        <h4 style="margin-left:-400px;font-size:30px;">Green Minds</h4>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/dashboard" target="_blank">Dashboard</a></li>
+            <li><a href="/roadmap">Climate Quiz</a></li>
+            <li><a href="/gallery">Multimedia Gallery</a></li>
+            <li><a href="/narrative">Climate Stories</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Global Protector</h1>
+        <img id="earth-image" src="{{ url_for('static', filename='IMG/earth.png') }}" height="200px" width="200px" alt="Earth" />
+        <div id="earth-status">
+            <h2>Earth's Health Meter: <span id="health-meter">100</span></h2>
+            <h2>CO2 Levels: <span id="co2-level">400</span> ppm</h2>
+            <h2>Temperature Rise: <span id="temperature-rise">1.0</span> °C</h2>
+            <h2>Economic Growth: <span id="economic-growth">100</span></h2>
+        </div>
+        <div class="actions">
+            <button onclick="performAction('plantTrees')">🌳 Plant Trees</button>
+            <button onclick="performAction('publicTransport')">🚌 Use Public Transport</button>
+            <button onclick="performAction('factoryPollution')">🏭 Factory Pollution</button>
+            <button onclick="performAction('deforestation')">🌲 Deforestation</button>
+            <button onclick="performAction('pollution')">💨 Pollute</button>
+            <button onclick="performAction('littering')">🗑️ Litter</button>
+            <button onclick="performAction('recycling')">♻️ Recycle</button>
+            <button onclick="performAction('solarEnergy')">☀️ Use Solar Energy</button>
+            <button onclick="performAction('windEnergy')">🌬️ Use Wind Energy</button>
+            <button onclick="performAction('meatConsumption')">🍖 High Meat Consumption</button>
+            <button onclick="performAction('plantBasedDiet')">🥗 Plant-Based Diet</button>
+            <button onclick="performAction('carpool')">🚗 Carpool</button>
+            <button onclick="performAction('electricVehicle')">⚡ Use Electric Vehicle</button>
+            <button onclick="performAction('heating')">🔥 Inefficient Heating</button>
+            <button onclick="performAction('insulation')">🏡 Good Insulation</button>
+        </div>
+        <div id="comment"></div>
+        <div id="end-game-message"></div>
+        <div class="end-game-buttons">
+            <button onclick="playAgain()">Play Again</button>
+            <button onclick="quitGame()">Quit</button>
+        </div>
+    </div>
+    <script>
+        let health = 100;
+        let co2Level = 400;
+        let temperatureRise = 15.0;
+        let economicGrowth = 100;
+
+        function updateDisplay() {
+            document.getElementById("health-meter").innerText = health;
+            document.getElementById("co2-level").innerText = co2Level;
+            document.getElementById("temperature-rise").innerText = temperatureRise.toFixed(1);
+            document.getElementById("economic-growth").innerText = economicGrowth;
+        }
+
+        function endGame(message) {
+            document.getElementById("end-game-message").innerText = message;
+            document.getElementById("end-game-message").style.display = "block";
+            document.querySelector(".end-game-buttons").style.display = "block"; // Show end game buttons
+            document.querySelector(".actions").style.display = "none"; // Hide action buttons
+        }
+
+        function performAction(action) {
+            let comment = "";
+
+            switch(action) {
+                case 'plantTrees':
+                    health += 5;
+                    economicGrowth += 10;
+                    comment = "You planted trees! 🌳 Earth is happy!";
+                    break;
+                case 'publicTransport':
+                    health += 3;
+                    economicGrowth += 5;
+                    comment = "Good choice! Using public transport is eco-friendly!";
+                    break;
+                case 'factoryPollution':
+                    health -= 5;
+                    economicGrowth -= 10;
+                    comment = "Uh-oh! Factory pollution harms Earth! 🏭";
+                    break;
+                case 'deforestation':
+                    health -= 8;
+                    economicGrowth -= 15;
+                    comment = "Oh no! Deforestation hurts our planet! 🌲";
+                    break;
+                case 'pollution':
+                    health -= 7;
+                    economicGrowth -= 12;
+                    comment = "Pollution is bad for health! 💨";
+                    break;
+                case 'littering':
+                    health -= 6;
+                    economicGrowth -= 8;
+                    comment = "Littering makes Earth sad! 🗑️";
+                    break;
+                case 'recycling':
+                    health += 4;
+                    economicGrowth += 8;
+                    comment = "Great job recycling! ♻️ Earth appreciates it!";
+                    break;
+                case 'solarEnergy':
+                    health += 5;
+                    economicGrowth += 12;
+                    comment = "Using solar energy is smart! ☀️";
+                    break;
+                case 'windEnergy':
+                    health += 5;
+                    economicGrowth += 12;
+                    comment = "Wind energy is a great choice! 🌬️";
+                    break;
+                case 'meatConsumption':
+                    health -= 4;
+                    economicGrowth -= 5;
+                    comment = "High meat consumption is not great for the planet! 🍖";
+                    break;
+                case 'plantBasedDiet':
+                    health += 6;
+                    economicGrowth += 10;
+                    comment = "A plant-based diet is better for Earth! 🥗";
+                    break;
+                case 'carpool':
+                    health += 4;
+                    economicGrowth += 6;
+                    comment = "Carpooling helps reduce emissions! 🚗";
+                    break;
+                case 'electricVehicle':
+                    health += 5;
+                    economicGrowth += 10;
+                    comment = "Using electric vehicles is eco-friendly! ⚡";
+                    break;
+                case 'heating':
+                    health -= 5;
+                    economicGrowth -= 10;
+                    comment = "Inefficient heating is bad for Earth! 🔥";
+                    break;
+                case 'insulation':
+                    health += 4;
+                    economicGrowth += 8;
+                    comment = "Good insulation is energy-efficient! 🏡";
+                    break;
+            }
+
+            co2Level = 400 + (100 - health) + (economicGrowth - 100) / 10; // Simple formula to adjust CO2 levels
+            temperatureRise = Math.max(1.0, 1.0 + (400 - co2Level) / 100); // Temperature rise is affected by CO2 levels
+            economicGrowth = Math.min(400, economicGrowth); // Maximum economic growth cap
+
+            updateDisplay();
+            document.getElementById("comment").innerText = comment;
+
+            // Check for game over conditions
+            if (health <= 0 ) {
+                endGame("Game Over! Earth is not happy. Try again!");
+            } else if (economicGrowth > 300) {
+                endGame("Congratulations! You have made Earth very happy! 🌍🎉");
+            }
+        }
+
+        function playAgain() {
+            // Reset the game
+            health = 100;
+            co2Level = 400;
+            temperatureRise = 1.0;
+            economicGrowth = 100;
+            updateDisplay();
+            document.getElementById("end-game-message").style.display = "none";
+            document.querySelector(".end-game-buttons").style.display = "none"; // Hide end game buttons
+            document.querySelector(".actions").style.display = "block"; // Show action buttons
+            document.getElementById("comment").innerText = ""; // Clear comment
+        }
+
+        function quitGame() {
+            window.location.href = "/"; // Redirect to home page
+        }
+
+        updateDisplay(); // Initial display update
+    </script>
+</body>
+</html>

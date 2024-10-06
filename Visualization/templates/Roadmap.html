@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Heroes Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh; /* Full height of the viewport */
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: center;
+            justify-content: center; /* Center items vertically */
+            color: #333; /* Text color */
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun font for kids */
+            text-align: center;
+            background-color: #f0f8ff; /* Light background color */
+            padding-top: 80px; /* Space for navigation bar */
+            overflow: hidden; /* Prevent scrolling */
+            
+        }
+
+        h1 {margin-top: 50px;
+            margin-bottom: 20px; /* Space below title */
+            font-size: 3em; /* Adjust font size */
+            color: #2e8b57; /* Green color */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Text shadow for better visibility */
+        }
+
+        .roadmap {
+            margin-top:30px;
+            display: flex; /* Use flexbox for horizontal layout */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            justify-content: center; /* Center levels */
+            gap: 15px; /* Space between levels */
+        }
+
+        .level {
+            background-color: #ffe4b5; /* Light peach background */
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners */
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
+            width: 150px; /* Fixed width for levels */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow effect */
+        }
+
+        .level:hover {
+            transform: scale(1.1); /* Scale up on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Enhance shadow on hover */
+        }
+
+        .level h2 {
+            font-size: 1.5em; /* Smaller font size for level titles */
+            color: #ff6347; /* Tomato color */
+            margin-bottom: 10px; /* Space below level title */
+        }
+
+        .level button {
+            background-color: #32cd32; /* Lime green button */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px; /* Rounded button corners */
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+        }
+
+        .level button:hover {
+            background-color: #28a745; /* Darker green on hover */
+            transform: scale(1.05); /* Slight enlargement */
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.7); /* Light background */
+            padding: 15px 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Shadow effect */
+            border-radius: 10px;
+            position: fixed;
+            top: 20px;
+            width: 90%;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: #2e8b57; /* Green color */
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            font-size: 20px; /* Increased font size */
+            font-weight: bold; /* Made text bold */
+        }
+
+        .nav-links a:hover {
+            color: #ff6347; /* Tomato color on hover */
+            transform: scale(1.1);
+        }
+
+        .logo img {
+            height: 60px; /* Increased logo size */
+            width: 60px; /* Increased logo size */
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Soft shadow effect */
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5); /* Glow effect on hover */
+            transform: scale(1.05); /* Slight enlargement */
+        }
+
+        /* Footer */
+        footer {position:relative;
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            width: 100%;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+            margin-top: 75px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo" style="font-size: 40px; font-weight: bold;">
+            <img src="{{ url_for('static', filename='IMG/logo.png') }}" alt="Green Minds Logo"> <!-- Replace with actual logo path -->
+        </div>
+        <h4 style="margin-left: -290px; font-size: 30px;">Green Minds</h4>
+
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/dashboard" target="_blank">Dashboard</a></li>
+            <li><a href="/roadmap">Climate Quiz</a></li>
+            <li><a href="/gallery">Multimedia Gallery</a></li>
+            <li><a href="/narrative">Climate Stories</a></li>
+        </ul>
+    </nav>
+
+    <h1>Climate Heroes Quiz</h1>
+    <div class="roadmap">
+        <div class="level">
+            <h2>Level 1</h2>
+            <button onclick="location.href='{{ url_for('static', filename='Carbon_Hero_quiz/Level1/index.html') }}'">Start Level 1</button>
+        </div>
+        <div class="level">
+            <h2>Level 2</h2>
+            <button onclick="location.href='{{ url_for('static', filename='Carbon_Hero_quiz/Level2/index.html') }}'">Start Level 2</button>
+        </div>
+        <div class="level">
+            <h2>Level 3</h2>
+            <button onclick="location.href='{{ url_for('static', filename='Carbon_Hero_quiz/Level3/index.html') }}'">Start Level 3</button>
+        </div>
+        <div class="level">
+            <h2>Level 4</h2>
+            <button onclick="location.href='{{ url_for('static', filename='Carbon_Hero_quiz/Level4/index.html') }}'">Start Level 4</button>
+        </div>
+        <div class="level">
+            <h2>Level 5</h2>
+            <button onclick="location.href='{{ url_for('static', filename='Carbon_Hero_quiz/Level5/index.html') }}'">Start Level 5</button>
+        </div>
+        <div class="level">
+            <h2>Level 6</h2>
+            <button onclick="location.href='{{ url_for('static', filename='Carbon_Hero_quiz/Level6/index.html') }}'">Start Level 6</button>
+        </div>
+        <div class="level">
+            <h2>Level 7</h2>
+            <button onclick="location.href='Carbon Hero quiz/Level1/index.html'">Start Level 7</button>
+        </div>
+        <div class="level">
+            <h2>Level 8</h2>
+            <button onclick="location.href='Carbon Hero quiz/Level2/index.html'">Start Level 8</button>
+        </div>
+        <div class="level">
+            <h2>Level 9</h2>
+            <button onclick="location.href='Carbon Hero quiz/Level3/index.html'">Start Level 9</button>
+        </div>
+        <div class="level">
+            <h2>Level 10</h2>
+            <button onclick="location.href='Carbon Hero quiz/Level4/index.html'">Start Level 10</button>
+        </div>
+        <div class="level">
+            <h2>Level 11</h2>
+            <button onclick="location.href='Carbon Hero quiz/Level5/index.html'">Start Level 11</button>
+        </div>
+        <div class="level">
+            <h2>Level 12</h2>
+            <button onclick="location.href='Carbon Hero quiz/Level6/index.html'">Start Level 12</button>
+        </div>
+        <div class="level">
+            <h2>Level 13</h2>
+            <button onclick="location.href='{{ url_for('static', filename='Carbon_Hero_quiz/Level1/index.html') }}'">Start Level 13</button>
+        </div>
+        <div class="level">
+            <h2>Level 14</h2>
+            <button onclick="location.href='{{ url_for('static', filename='Carbon_Hero_quiz/Level2/index.html') }}'">Start Level 14</button>
+        </div>
+        <div class="level">
+            <h2>Level 15</h2>
+            <button onclick="location.href='{{ url_for('static', filename='Carbon_Hero_quiz/Level3/index.html') }}'">Start Level 15</button>
+        </div>
+        <div class="level">
+            <h2>Level 16</h2>
+            <button onclick="location.href='{{ url_for('static', filename='Carbon_Hero_quiz/Level4/index.html') }}'">Start Level 16</button>
+        </div>
+        <div class="level">
+            <h2>Level 17</h2>
+            <button onclick="location.href='{{ url_for('static', filename='Carbon_Hero_quiz/Level5/index.html') }}'">Start Level 17</button>
+        </div>
+        <div class="level">
+            <h2>Level 18</h2>
+            <button onclick="location.href='{{ url_for('static', filename='Carbon_Hero_quiz/Level6/index.html') }}'">Start Level 18</button>
+        </div>
+        <div class="level">
+            <h2>Level 19</h2>
+            <button onclick="location.href='Carbon Hero quiz/Level1/index.html'">Start Level 19</button>
+        </div>
+        <div class="level">
+            <h2>Level 20</h2>
+            <button onclick="location.href='Carbon Hero quiz/Level2/index.html'">Start Level 20</button>
+        </div>
+        <div class="level">
+            <h2>Level 21</h2>
+            <button onclick="location.href='Carbon Hero quiz/Level3/index.html'">Start Level 21</button>
+        </div>
+        <div class="level">
+            <h2>Level 22</h2>
+            <button onclick="location.href='Carbon Hero quiz/Level4/index.html'">Start Level 22</button>
+        </div>
+        <div class="level">
+            <h2>Level 23</h2>
+            <button onclick="location.href='Carbon Hero quiz/Level5/index.html'">Start Level 23</button>
+        </div>
+        <div class="level">
+            <h2>Level 24</h2>
+            <button onclick="location.href='Carbon Hero quiz/Level6/index.html'">Start Level 24</button>
+        </div>
+    </div>
+    <footer>
+        <p>© 2024 Green Minds. All rights reserved.</p>
+    </footer>
+</body>
+</html>

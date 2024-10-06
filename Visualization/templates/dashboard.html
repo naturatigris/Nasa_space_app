@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Change Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            display:block;
+            font-family: 'Arial', sans-serif;
+            background: #01796f;
+            color: #000;
+            margin: 0;
+            padding: 20px;
+            animation: fadeIn 1s ease-in; /* Fade-in effect */
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1 {
+            text-align: center;
+            color: #3a8e33;
+            font-size: 3em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Text shadow for depth */
+        }
+        
+        .container {
+            left:100px;
+            max-width: 800px;
+            margin: 200px ; /* Centering container */
+            text-align: center;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            background-color: #ffffff;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .option-btn {
+            background: linear-gradient(90deg, #4caf50, #1b5e20); /* Gradient button */
+            color: white;
+            padding: 15px 30px;
+            margin: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s;
+            font-size: 1.2em;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.4s ease;
+            z-index: 0;
+        }
+
+        .option-btn:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .option-btn:hover {
+            background: linear-gradient(90deg, #388e3c, #0d4d00);
+            transform: scale(1.05);
+        }
+
+        .visualization, #quiz-game {
+            display: none;
+            margin-top: 20px;
+            transition: opacity 0.5s ease; /* Smooth transition for visibility */
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            width: 100%;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+            position:absolute;
+            z-index: 1;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #quiz-game {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            font-size: 2em;
+            color: #3a8e33;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header::after {
+            content: '';
+            display: block;
+            height: 5px;
+            width: 50%;
+            background: #4caf50; /* Green accent line */
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+            animation: slideIn 0.5s ease forwards; /* Slide-in animation */
+        }
+
+        @keyframes slideIn {
+            from { width: 0; }
+            to { width: 50%; }
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            padding: 15px 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 20px;
+            width: 90%;
+            z-index: 1000;
+            right: 3.5%;
+            border-radius: 10px;
+        }
+
+        .logo img {
+            height: 60px;
+            width: 60px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: #28a745;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo" style="font-size: 40px; align-content:center;align-items:center; font-weight: bold;">
+            <img src="{{ url_for('static', filename='IMG/logo.png') }}" alt="Green Minds Logo"> <!-- Replace with actual logo path -->
+        </div>
+        <h4 style="margin-left:-150px;font-size:30px; color:white;">Green Minds</h4>
+
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/dashboard" target="_blank">Dashboard</a></li>
+            <li><a href="/roadmap">Climate Quiz</a></li>
+            <li><a href="/gallery">Multimedia Gallery</a></li>
+            <li><a href="/narrative">Climate Stories</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Climate Change Dashboard</h1>
+        <div class="btn-container">
+            <button class="option-btn" id="general-audience-btn">General Audience</button>
+            <button class="option-btn" id="school-student-btn">School Student</button>
+        </div>
+
+        <div id="visualization" class="visualization">
+            <h2 class="section-header">Choose Your Visualization</h2>
+            <button class="option-btn" onclick="location.href='{{ url_for('dash_page') }}'" id="co2-story-btn">
+                CO2/CH4 Storytelling
+            </button>
+                        <button class="option-btn" onclick="location.href='{{ url_for('map_page') }}'" id="time-series-btn">Time Series Prediction</button>
+        </div>
+
+        <div id="quiz-game">
+            <h2 class="section-header">Climate Heroes Quiz</h2>
+            <p>Welcome to the Climate Heroes Quiz! Test your knowledge about climate change!</p>
+            <button class="option-btn" onclick="location.href='{{ url_for('roadmap') }}'" id="start-quiz-btn">Start Quiz</button>
+            <hr>
+            <h2 class="section-header">Global Protector Game</h2>
+            <p class="game-description">Join the Global Protector Game to learn how to protect the planet! You will make choices to save the environment.</p>
+            <button class="option-btn" onclick="location.href='{{ url_for('sop') }}'" id="start-game-btn">Start Game</button>
+        </div>
+        
+        </div>
+        
+        <footer>
+            <p>© 2024 Green Minds. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('general-audience-btn').addEventListener('click', function() {
+            document.getElementById('visualization').style.display = 'block';
+            document.getElementById('quiz-game').style.display = 'none';
+        });
+
+        document.getElementById('school-student-btn').addEventListener('click', function() {
+            document.getElementById('quiz-game').style.display = 'block';
+            document.getElementById('visualization').style.display = 'none';
+        });
+
+        // Dummy button actions for visualization buttons
+        document.getElementById('co2-story-btn').addEventListener('click', function() {
+            alert("CO2 Storytelling visualization will be displayed here.");
+        });
+
+        document.getElementById('ch4-story-btn').addEventListener('click', function() {
+            alert("CH4 Storytelling visualization will be displayed here.");
+        });
+
+        document.getElementById('time-series-btn').addEventListener('click', function() {
+            alert("Time Series Prediction visualization will be displayed here.");
+        });
+
+        document.getElementById('start-quiz-btn').addEventListener('click', function() {
+            alert("The Climate Heroes Quiz will begin now!");
+        });
+
+        document.getElementById('start-game-btn').addEventListener('click', function() {
+            alert("The Global Protector Game will start now!");
+        });
+    </script>
+</html>

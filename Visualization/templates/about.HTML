@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Green Minds</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Global Styling */
+        body {
+          font-family: 'Poppins', sans-serif;
+          margin: 0;
+          padding: 0;
+          background: linear-gradient(135deg, #283048, #859398); /* Updated background */
+          background-size: 400% 400%;
+          animation: gradientShift 12s ease infinite;
+          color: #fff;
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          align-items: center;
+        }
+        
+        /* Gradient Animation */
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation Bar */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background: rgba(255, 255, 255, 0.2); /* Glassmorphism effect */
+          backdrop-filter: blur(8px);
+          padding: 15px 20px;
+          box-shadow: 0 6px 20px rgba(31, 38, 135, 0.3); /* Frosted shadow */
+          border-radius: 10px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          position:absolute;
+          top: 20px;
+          width: 90%;
+          z-index: 1000;
+          right: 45px;
+        }
+        
+        .nav-links {
+          list-style: none;
+          display: flex;
+        }
+        
+        .nav-links li {
+          margin-left: 20px;
+        }
+        
+        .nav-links a {
+          color: #fff;
+          text-decoration: none;
+          transition: color 0.3s ease, transform 0.3s ease;
+          font-size: 20px; /* Increased font size */
+          font-weight: bold; /* Made text bold */
+        }
+        
+        .nav-links a:hover {
+          color: #28a745; /* Green on hover */
+          transform: scale(1.1);
+        }
+        .logo{
+            align-content:center;
+        }
+        .logo img {
+          height: 80px; /* Increased logo size */
+          width: 80px; /* Increased logo size */
+          margin-right: 10px;
+          border-radius: 50%;
+          object-fit: cover;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Soft shadow effect */
+          transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        
+        .logo img:hover {
+          box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5); /* Glow effect on hover */
+          transform: scale(1.05); /* Slight enlargement */
+        }
+        html { scroll-behavior: smooth; }
+        
+        /* About Section */
+        .about-section {
+          padding: 80px 20px;
+          text-align: center;
+          background-color: rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
+          margin: 50px 0;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+          max-width: 900px;
+          animation: fadeInUp 1.2s ease both;
+        }
+
+        /* Fade-in animation for sections */
+        @keyframes fadeInUp {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .about-section h1 {
+          font-size: 40px;
+          color: #fff;
+          margin-bottom: 20px;
+          position: relative;
+          animation: slideIn 0.8s ease both;
+        }
+
+        /* Slide-in animation for text */
+        @keyframes slideIn {
+          0% {
+            opacity: 0;
+            transform: translateX(-50px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        .about-section p {
+          font-size: 18px;
+          color: #ddd;
+          margin-top: 20px;
+          line-height: 1.8;
+        }
+        
+        /* Features Section */
+        .features {
+          padding: 80px 20px;
+          text-align: center;
+          display: flex;
+          justify-content: space-around;
+          flex-wrap: wrap;
+          margin 20px;
+        }
+        
+        .features h2 {
+          font-size: 35px;
+          margin-bottom: 30px;
+        }
+        
+        .features-item {
+          width: 300px;
+          background-color: rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
+          padding: 30px;
+          margin: 15px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+          transition: background 0.3s ease, transform 0.3s ease;
+          animation: fadeInUp 1.5s ease both;
+        }
+        
+        .features-item:hover {
+          background-color: rgba(255, 255, 255, 0.35);
+          transform: scale(1.05);
+        }
+        
+        .features-item p {
+          font-size: 20px;
+          color: #ddd;
+          margin: 10px 0;
+        }
+        
+        /* Scroll-triggered animation */
+        .features-item:before {
+          content: "✔";
+          font-size: 40px;
+          color: yellow;
+          margin-right: 10px;
+          font-weight: bold;
+        }
+
+        /* Team Section */
+        .team {
+          display: flex;
+          justify-content: space-around;
+          padding: 60px 20px;
+          text-align: center;
+          gap: 80px;
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .team-member {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
+          padding: 20px;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+          transition: transform 0.3s ease;
+          width: 250px;
+          animation: fadeInUp 1.2s ease both;
+        }
+        
+        .team-member img {
+          height: 150px;
+          width: 150px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-bottom: 20px;
+        }
+        
+        .team-member h3 {
+          font-size: 24px;
+          color: #fff;
+        }
+        
+        .team-member p {
+          font-size: 16px;
+          color: #ddd;
+        }
+        
+        .team-member:hover {
+          transform: scale(1.05);
+        }
+        
+        /* Centered Logo */
+        .centered-logo {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 200px;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .centered-logo img {
+          width: 300px;
+          height: 300px;
+          border-radius: 50%;
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .centered-logo img:hover {
+          transform: scale(1.1);
+          box-shadow: 0 12px 40px rgba(255, 255, 255, 0.5);
+        }
+        
+        .centered-logo h2 {
+          margin-top: 20px;
+          font-size: 24px;
+          color: #fff;
+          text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Footer */
+        footer {
+          text-align: center;
+          padding: 20px;
+          background: rgba(0, 0, 0, 0.7);
+          color: white;
+          width: 100%;
+          box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="logo" style="font-size: 40px; align-content:center;align-items:center;/* Increased font size */font-weight: bold;">
+      <img src="{{ url_for('static', filename='IMG/logo.png') }}" alt="Green Minds Logo"> <!-- Replace with actual logo path -->
+  </div>
+  <h4 style="margin-left:-250px;font-size:30px;">Green Minds</h4>
+
+  <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/dashboard" target="_blank">Dashboard</a></li>
+      <li><a href="/roadmap">Climate Quiz</a></li>
+      <li><a href="/gallery">Multimedia Gallery</a></li>
+      <li><a href="/narrative">Climate Stories</a></li>
+  </ul>
+</nav>
+
+
+
+    <!-- Centered Logo -->
+    <div class="centered-logo">
+        <img src="{{url_for('static', filename='IMG/logo.png')}}" alt="Green Minds Logo">
+    </div>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <h1>About Us</h1>
+        <p>At Green Minds, we are committed to educating and inspiring individuals to take action against climate change. Our mission is to provide accessible information and resources that empower communities to make informed decisions for a sustainable future.</p>
+    </section>
+    <h2 style="font-size: 35px;;fontstyle:bold;">Key Features</h2>
+    <!-- Key Features Section -->
+    <section class="features">
+        
+        <div class="features-item">
+            <p>Interactive Data Visualizations for Climate Change with an ARIMA model for predictions.</p>
+        </div>
+        <div class="features-item">
+          <p>Customizable Dashboard for in-depth data analysis</p>
+      </div>
+        <div class="features-item">
+            <p>Interactive Quiz for educational engagement</p>
+        </div>
+      
+        <div class="features-item">
+            <p>Storytelling through Blogs and Podcasts on Climate Science</p>
+        </div>
+        <div class="features-item">
+          <p>Multimedia Gallery showcasing climate-related content.</p>
+      </div>
+      <div class="features-item">
+        <p>"Global Protector" Game to promote environmental awareness.</p>
+    </div>
+    <div class="features-item">
+      <p>Image Slider to visually present future scenarios.</p>
+  </div>
+    </section>
+ 
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="team-member">
+            <img src="{{url_for('static', filename='IMG/1.jpeg')}}" alt="Person 1">
+            <h3>Krithika Priya PR</h3>
+            <p>Co-Founder</p>
+            <p>Krithika's mission is to inspire individuals and communities to take action for a greener future.</p>
+        </div>
+        <div class="team-member">
+            <img src="{{url_for('static', filename='IMG/2.jpeg')}}" alt="Person 2">
+            <h3>Sandhya A</h3>
+            <p>Co-Founder</p>
+            <p>Sandhya is dedicated to leveraging data to drive meaningful change in climate action and sustainability.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Green Minds. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
