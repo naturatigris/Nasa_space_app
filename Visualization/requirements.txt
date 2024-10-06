@@ -1,0 +1,11 @@
+Flask
+pandas
+dash
+numpy
+matplotlib
+statsmodels
+pmdarima
+plotly
+requests
+google-generativeai
+gunicorn
